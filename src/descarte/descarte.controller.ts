@@ -11,6 +11,11 @@ export class DescarteController {
         return this.descarteService.getDescarte();
     }
 
+    @Get(':id')
+    async getById(@Param('id') id: string) {
+        return this.descarteService.getById(id);
+    }
+
     @Post()
     async createDescarte(@Body() descarteData: Omit<Descarte, 'id'>): Promise<{ id: string }> {
         console.log('Requisição recebida:', descarteData);

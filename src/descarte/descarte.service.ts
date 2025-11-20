@@ -7,7 +7,6 @@ import { Model } from 'mongoose';
 export class DescarteService {
     constructor( @InjectModel('Descarte') private readonly descarteModel: Model<Descarte>) {}
 
-    // CREATE
     async createDescarte(data: Omit<Descarte, 'id'>) {
         const descarteModel = new this.descarteModel({
             name: data.name,
@@ -20,13 +19,19 @@ export class DescarteService {
         return result._id as string;
     }
 
-    // READ
     async getDescarte() {
         const descartes = await this.descarteModel.find().exec();
         return descartes;
     }
 
-    // UPDATE
+    async getById(id: string) {
+        const descarte = await this.descarteModel.findById(id).exec();
+        if (!descarte) {
+            throw new NotFoundException('Descarte não encontrado');
+        }
+        return descarte;
+    }
+
     async updateDescarte(id: string, newName?: string) {
         const updatedDescarte = await this.descarteModel.findById(id).exec();
         if (!updatedDescarte) {
@@ -43,7 +48,6 @@ export class DescarteService {
         }
     }
 
-    // DELETE
     async deleteDescarte(id: string) {
         const result = await this.descarteModel.deleteOne({_id: id}).exec();
         if (result.deletedCount === 0) {

@@ -11,7 +11,6 @@ export class RegistroService {
         @InjectModel('Descarte') private readonly descarteModel: Model<Descarte>,
     ) {}
 
-    //CREATE
     async createRegistro(data: Omit<Registro, 'id' | 'dataDescarte'>) {
         const novoRegistro = new this.registroModel({
             nomeUsuario: data.nomeUsuario,
@@ -22,29 +21,19 @@ export class RegistroService {
         return result._id as string;
     }
 
-    //READ
-    async getHistorico(filtros: any) {
+    async getHistorico(filtros: any = {}) {
         const query: any = {};
 
-        if (filtros.pontoId) {
-            query.pontoDescarteId = filtros.pontoId;
-        }
-        if (filtros.usuario) {
-            query.nomeUsuario = filtros.usuario;
-        }
-        if (filtros.residuo) {
-            query.tipoResiduo = filtros.residuo;
-        }
-        if (filtros.data) {
-            query.dataDescarte = filtros.data;
-        }
+        if (filtros.pontoId) query.pontoDescarteId = filtros.pontoId;
+        if (filtros.usuario) query.nomeUsuario = filtros.usuario;
+        if (filtros.residuos) query.tipoResiduo = filtros.residuos;
+        if (filtros.data) query.dataDescarte = filtros.data;
 
-        const registros = (await this.registroModel.find(query));
+        const registros = await this.registroModel.find(query);
         console.log('registros', registros);
-        return registros
-    }
+        return registros;
+}
 
-    // DASHBOARD:
     async getRelatorio() {
         const totalRegistros = await this.registroModel.countDocuments().exec();
         const DescarteModel = mongoose.model('Descarte');

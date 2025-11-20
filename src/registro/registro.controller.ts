@@ -14,6 +14,11 @@ export class RegistroController {
         const id = await this.registroService.createRegistro(registroData);
         return {id};
     }
+
+    @Get()
+    async getAll() {
+        return this.registroService.getHistorico({});
+    }
     
     @Get('historico')
     async getHistorico(

@@ -10,7 +10,7 @@ export const RegistroSchema = new mongoose.Schema({
     tipoResiduo: { 
         type: [String], 
         required: true,
-        enum: ['plastico', 'papel', 'organicos', 'eletronicos', 'vidro']
+        enum: ['plástico', 'papel', 'orgânico', 'eletrônico', 'vidro']
     },
     dataDescarte: {
         type: Date,

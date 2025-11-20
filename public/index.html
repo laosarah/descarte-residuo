@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Registros Pontos de Descarte Piracicaba</title>
+</head>
+<body>
+    <h1>Pontos de Descarte</h1>
+    <div id="message" class="hidden"></div>
+    <form id="form-descarte">
+        <input type="hidden" id="descarte-id">
+        <p>
+            <label for="name">Nome:</label><br>
+            <input type="text" id="name">
+        </p>
+        <p>
+            <label for="bairro">Bairro:</label><br>
+            <input type="text" id="bairro">
+        </p>
+        <p>
+            <label for="local">Local:</label><br>
+            <input type="text" id="local" placeholder="público ou privado">
+        </p>
+        <p>
+            <label for="categoria">Categorias (separadas por vírgula):</label><br>
+            <input type="text" id="categoria" placeholder="papel, plástico">
+        </p>
+        <p>
+            <label>Geolocalização:</label><br>
+            <input type="number" id="geolocalizacao-lat" placeholder="Latitude">
+            <input type="number" id="geolocalizacao-lon" placeholder="Longitude">
+        </p>
+        <button id="button_inserir">Salvar</button>
+    </form>
+    <hr>
+    <section id="content"></section>
+    <script src="main.js"></script>
+</body>
+</html>
